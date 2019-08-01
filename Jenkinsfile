@@ -1,5 +1,5 @@
-node {
-label 'windows' 
+node (label:'windows'){
+ 
     withMaven(maven:'maven') {
        customWorkspace "D:\JENKINSMASTER/jenkins_workspace/${JOB_NAME}_${BUILD_NUMBER}"
         stage('Checkout') {
