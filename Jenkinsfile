@@ -1,7 +1,7 @@
 node (label:'windows'){
  
     withMaven(maven:'maven') {
-       customWorkspace "D:\JENKINSMASTER/jenkins_workspace/${JOB_NAME}_${BUILD_NUMBER}"
+       customWorkspace "D:/JENKINSMASTER/jenkins_workspace/${JOB_NAME}_${BUILD_NUMBER}"
         stage('Checkout') {
             git url: 'https://github.com/dhananjayakTpm/AtoBeMailTest.git', credentialsId: 'master', branch: 'master'
         }
