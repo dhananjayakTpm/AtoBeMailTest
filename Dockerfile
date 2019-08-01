@@ -1,6 +1,6 @@
 FROM openjdk:8u171-jdk-alpine3.8
 MAINTAINER Arun Johnson <arun.j@thinkpalm.com>
-RUN mkdir testassured
+RUN mkdir testassuredmail
 
 ADD target/restassured.jar restassured.jar
 ADD testng-6.11.jar /
