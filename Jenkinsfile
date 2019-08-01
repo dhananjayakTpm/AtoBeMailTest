@@ -13,11 +13,11 @@ label 'windows'
         }
 
         stage('Image') {
-                bat 'docker stop restassuredMail || exit 0'
-				bat 'docker rm restassuredMail || exit 0'
-                cmd = "docker rmi restassuredMail:${env.version} || exit 0"
+                bat 'docker stop restassuredmail || exit 0'
+				bat 'docker rm restassuredmail || exit 0'
+                cmd = "docker rmi restassuredmail:${env.version} || exit 0"
                 bat cmd
-                bat "docker build -t restassuredMail:${env.version} ."
+                bat "docker build -t restassuredmail:${env.version} ."
             
         }
 
@@ -25,13 +25,13 @@ label 'windows'
 
        		 print "${params}"
         	 if ("${params.modes}" == "DRY_RUN") {
-       			 bat "docker run -p 8081:8081 -h restassuredMail --name restassuredMail --net host -m=500m restassuredMail:${env.version} DRY_RUN"
+       			 bat "docker run -p 8081:8081 -h restassuredmail --name restassuredmail --net host -m=500m restassuredmail:${env.version} DRY_RUN"
       	     }
       	     else if("${params.modes}" == "RUN") {
-	  	 	 	 bat "docker run -p 8081:8081 -h restassuredMail --name restassuredMail --net host -m=500m restassuredMail:${env.version} RUN"
+	  	 	 	 bat "docker run -p 8081:8081 -h restassuredmail --name restassuredmail --net host -m=500m restassuredmail:${env.version} RUN"
       	     }
       	     else if("${params.modes}" == "FULL_RUN") {
-	  	 		 bat "docker run -p 8081:8081 -h restassuredMail --name restassuredMail --net host -m=500m restassuredMail:${env.version} FULL_RUN"
+	  	 		 bat "docker run -p 8081:8081 -h restassuredmail --name restassuredmail --net host -m=500m restassuredmail:${env.version} FULL_RUN"
       	     }
           
           	  
