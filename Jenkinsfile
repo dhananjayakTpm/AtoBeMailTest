@@ -1,5 +1,6 @@
+
 node (label:'windows'){
- customWorkspace '/jenkins_workspace/${JOB_NAME}_${BUILD_NUMBER}'
+
     withMaven(maven:'maven') {       
         stage('Checkout') {
             git url: 'https://github.com/dhananjayakTpm/AtoBeMailTest.git', credentialsId: 'master', branch: 'master'
@@ -32,7 +33,8 @@ node (label:'windows'){
       	     else if("${params.modes}" == "FULL_RUN") {
 	  	 		 bat "docker run -p 8081:8081 -h restassuredmail --name restassuredmail --net host -m=500m restassuredmail:${env.version} FULL_RUN"
       	     }
-          
+		
+           bat "docker container export -o myContainerFileSystem11.tar restassuredmail"
          env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
 	attachLog :true,
