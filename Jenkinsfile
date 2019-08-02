@@ -35,8 +35,15 @@ node (label:'windows'){
       	     }
 		
            bat "docker container export -o restassuredmail.zip restassuredmail"
-	 print "${env.WORKSPACE+'/restassuredmail.zip'}"	
-	 unzip( zipFile: env.WORKSPACE+'/restassuredmail.zip')
+	 print "${env.WORKSPACE+'/restassuredmail.zip'}"
+		
+	def zipFile = new java.util.zip.ZipFile(new File(env.WORKSPACE+'/restassuredmail.zip'))
+
+zipFile.entries().each {
+   println zipFile.getInputStream(it).text
+}	
+		
+
          env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
 	attachLog :true,
