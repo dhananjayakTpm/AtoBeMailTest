@@ -39,6 +39,12 @@ node (label:'windows'){
 		
 	 unzip( zipFile: env.WORKSPACE+'/restassuredmail.zip',"d3")
 		
+		fileOperations([  
+ fileUnZipOperation(
+                            filePath: "${WORKSPACE}/restassuredmail.zip",
+                            targetLocation: "${WORKSPACE}")
+])
+		
 
          env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
