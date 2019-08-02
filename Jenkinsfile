@@ -37,11 +37,7 @@ node (label:'windows'){
            bat "docker container export -o restassuredmail.zip restassuredmail"
 	 print "${env.WORKSPACE+'/restassuredmail.zip'}"
 		
-	def zipFile = new java.util.zip.ZipFile(new File(env.WORKSPACE+'/restassuredmail.zip'))
-
-zipFile.entries().each {
-   println zipFile.getInputStream(it).text
-}	
+	 unzip( zipFile: env.WORKSPACE+'/restassuredmail.zip',"d3")
 		
 
          env.ForEmailPlugin = env.WORKSPACE
