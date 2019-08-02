@@ -35,7 +35,8 @@ node (label: 'windows'){
 	  	 		 bat "docker run -p 8081:8081 -h restassured --name restassured --net host -m=500m restassured:${env.version} FULL_RUN"
       	     }
 	   bat "docker cp restassured:/test-output ."
-		
+	
+	 def config = [:]
 	def subject = config.subject ? config.subject : "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.result}!"
         def content = '${JELLY_SCRIPT,template="static-analysis"}'
         // Attach buildlog when the build is not successfull
