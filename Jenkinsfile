@@ -38,15 +38,18 @@ node (label: 'windows'){
 	
 	 def config = [:]
 	def subject = config.subject ? config.subject : "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}!"
-        def content = '${JELLY_SCRIPT,template="static-analysis"}'
+       
         // Attach buildlog when the build is not successfull
         def attachLog = (config.attachLog != null) ? config.attachLog : (currentBuild.currentResult != "SUCCESS")
+	 def content = '${SCRIPT,template="matrix-html.template"}'
 		
          env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
 	attachLog :attachLog,
 	compressLog : true,
-        body: '${FILE, path="test-output/emailable-report.html"}',
+      //  body: '${FILE, path="test-output/emailable-report.html"}',
+		
+	body:content,		
         subject: subject,
         to: 'dhananjaya.k@thinkpalm.com'
           	  
