@@ -37,10 +37,10 @@ node (label: 'windows'){
 	   bat "docker cp restassured:/test-output ."
 	
 	 def config = [:]
-	def subject = config.subject ? config.subject : "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.result}!"
+	def subject = config.subject ? config.subject : "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}!"
         def content = '${JELLY_SCRIPT,template="static-analysis"}'
         // Attach buildlog when the build is not successfull
-        def attachLog = (config.attachLog != null) ? config.attachLog : (currentBuild.result != "SUCCESS")
+        def attachLog = (config.attachLog != null) ? config.attachLog : (currentBuild.currentResult != "SUCCESS")
 		
          env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
