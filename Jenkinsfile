@@ -37,7 +37,7 @@ node (label:'windows'){
            bat "docker container export -o restassuredmail.zip restassuredmail"
 	 print "${env.WORKSPACE+'/restassuredmail.zip'}"
 		
-	 unzip( zipFile: env.WORKSPACE+'/restassuredmail.zip',"d3")
+	
 		
 		fileOperations([  
  fileUnZipOperation(
