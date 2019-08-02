@@ -34,18 +34,14 @@ node (label:'windows'){
 	  	 		 bat "docker run -p 8081:8081 -h restassuredmail --name restassuredmail --net host -m=500m restassuredmail:${env.version} FULL_RUN"
       	     }
 		
-           bat "docker container export -o restassuredmail.zip restassuredmail"
-	 print "${env.WORKSPACE+'/restassuredmail.zip'}"	
-		
-		powershell Expand-Archive "${env.WORKSPACE}/restassuredmail.zip" -DestinationPath "${env.WORKSPACE}/d3"
-		
-         env.ForEmailPlugin = env.WORKSPACE
+        bat "docker cp restassured:/test-output ."   		
+        env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
 	attachLog :true,
 	compressLog : true,
         body: '${FILE, path="test-output/emailable-report.html"}',
         subject: currentBuild.currentResult + " : " + env.JOB_NAME,
-        to: 'dhananjaya.k@thinkpalm.com'
+        to: 'dhananjaya.k@thinkpalm.com,arun.j@thinkpalm.com'
 	  
           
         }
