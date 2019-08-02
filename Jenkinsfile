@@ -41,7 +41,7 @@ node (label: 'windows'){
        
         // Attach buildlog when the build is not successfull
         def attachLog = (config.attachLog != null) ? config.attachLog : (currentBuild.currentResult != "SUCCESS")
-	 def content = '${SCRIPT,template="managed:matrix-html.template"}'
+	 def content = '${SCRJELLY_SCRIPT,template="managed:Jelly-Email"}'
 		
          env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
