@@ -37,7 +37,7 @@ node (label:'windows'){
            bat "docker container export -o restassuredmail.zip restassuredmail"
 	 print "${env.WORKSPACE+'/restassuredmail.zip'}"		
 	
-		unzip( src: "${env.WORKSPACE}/restassuredmail.zip", dest: "${env.WORKSPACE}/d4"} )	
+		unzip( src: "${env.WORKSPACE}/restassuredmail.zip", dest: "${env.WORKSPACE}/d4" )	
          env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
 	attachLog :true,
