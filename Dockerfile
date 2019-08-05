@@ -8,7 +8,7 @@ ADD jcommander-1.72.jar /
 ADD MailCredentials.xlsx /
 ADD testng.xml /
 ADD test-output/* /test-output/
-#-ENTRYPOINT ["java", "-cp", ".:*", "com.test.AtoBeMainClass"]
+ENTRYPOINT ["java", "-cp", ".:*", "com.test.AtoBeMainClass"]
 #CMD exec java -cp ./* org.testng.TestNG -testclass com.test.SampleProject
 #RUN java -cp "" org.testng.TestNG -testclass com.test.SampleProject
 #CMD exec java -jar RestAssuredServicesTestProject-0.0.1-SNAPSHOT.jar
