@@ -1,7 +1,8 @@
 node (label: 'windows'){
-
+def testArray=[:]
     withMaven(maven:'maven') {
-
+	try{
+			
         stage('Checkout') {
             git url: 'https://github.com/dhananjayakTpm/AtoBeMailTest.git', credentialsId: 'master', branch: 'master'
         }
@@ -10,6 +11,7 @@ node (label: 'windows'){
             bat 'mvn clean package shade:shade'
             def pom = readMavenPom file:'pom.xml'
             env.version = pom.version
+			testArray["Stage1"]=currentBuild
         }
 
         stage('Image') {
@@ -36,25 +38,39 @@ node (label: 'windows'){
       	     }
 	   bat "docker cp restassured:/test-output ."
 	
-	 def config = [:]
+	
+          	  
+	   	
+        
+	}
+	}catch(Exception){
+	 currentBuild.result = 'FAILURE'
+	}
+	
+		
+
+		
+		stage('mail'){
+		 def config = [:]
 	def subject = config.subject ? config.subject : "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}!"
        
         // Attach buildlog when the build is not successfull
-        def attachLog = (config.attachLog != null) ? config.attachLog : (currentBuild.currentResult != "SUCCESS")
-	 def content = '${SCRJELLY_SCRIPT,template="managed:Jelly-Email"}'
-		
+     //   def attachLog = (config.attachLog != null) ? config.attachLog : (currentBuild.currentResult != "SUCCESS")
+//	 def content = '${JELLY_SCRIPT,template="managed:Jelly2"}'
+		 def content = '${SCRIPT,template="managed:Tpm-Email-Template"}'
          env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
-	attachLog :attachLog,
+	attachLog :true,
 	compressLog : true,
       //  body: '${FILE, path="test-output/emailable-report.html"}',
 		
 	body:content,		
         subject: subject,
         to: 'dhananjaya.k@thinkpalm.com'
-          	  
-	   	
-        }
+		
+		 }
+		
+		
 
     }
 
