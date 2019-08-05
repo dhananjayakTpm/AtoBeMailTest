@@ -11,7 +11,9 @@ def testArray=[:]
             bat 'mvn clean package shade:shade'
             def pom = readMavenPom file:'pom.xml'
             env.version = pom.version
-			testArray["Stage1"]=currentBuild
+	   
+	     testArray["Stage1"]=currentBuild
+			
         }
 
         stage('Image') {
