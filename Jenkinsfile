@@ -76,7 +76,7 @@ List testArray = new ArrayList<Map<String,String>>();
 	def currentDir = new File("").getAbsolutePath()
 	print "${currentDir}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/archive/test-output/emailable-report.html"
 	def file1 = new File("${currentDir}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/archive/test-output/emailable-report.html")
-		print "${file1.exists()} file not eists"
+		print "file exists = ${file1.exists()} "
 		
 		//file operation starts
 		  
