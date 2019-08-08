@@ -60,7 +60,7 @@ public class mail {
 				multipart.addBodyPart(messageBodyPart2);
 				message.setContent(multipart);
 			//	Transport.send(message);
-				System.out.println("Mail Sent Successfully");
+				System.out.println("Mail Sent Successfully!");
 
 			} catch (MessagingException e) {
 				throw new RuntimeException(e);
